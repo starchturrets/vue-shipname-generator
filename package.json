@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "repository": {
-    "https://github.com/starchturrets/vue-shipname-generator"
+    "type": "git",
+    "url": "https://github.com/starchturrets/vue-shipname-generator"
   },
   "scripts": {
     "serve": "parcel src/index.html",
