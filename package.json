@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "https://github.com/starchturrets/vue-shipname-generator"
+  },
   "scripts": {
     "serve": "parcel src/index.html",
     "build": "parcel build src/index.html"
