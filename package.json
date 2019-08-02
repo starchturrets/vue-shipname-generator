@@ -25,5 +25,16 @@
   },
   "dependencies": {
     "vue": "^2.6.10"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "at-rule-empty-line-before": null
+    }
   }
 }
