@@ -7,23 +7,23 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  name: 'test',
-  props: ['namesObj'],
-  data() {
-    return {};
-  },
-  mounted() {
-    // console.log(this.namesObj.shipNames);
-  },
-  methods: {
-    test(i) {
-      // const index = this.namesObj.shipNames.indexOf(i);
-      console.log(i);
-      return i.toString();
+    name: 'test',
+    props: ['namesObj'],
+    data() {
+        return {};
     },
-  },
+    mounted() {
+    // console.log(this.namesObj.shipNames);
+    },
+    methods: {
+        test(i) {
+            // const index = this.namesObj.shipNames.indexOf(i);
+            console.log(i);
+            return i.toString();
+        },
+    },
 };
 </script>
 

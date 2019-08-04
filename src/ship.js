@@ -13,10 +13,7 @@ export default (first = '', second = '') => {
     const firstNameLength = mathMethod(firstName.length / 2);
     const secondNameLength = mathMethod(secondName.length / 2);
     const firstHalf = firstName.substring(0, firstNameLength);
-    const secondHalf = secondName.substring(
-      secondNameLength,
-      secondName.length,
-    );
+    const secondHalf = secondName.substring(secondNameLength, secondName.length);
     const coupleName = firstHalf + secondHalf;
     return coupleName;
     // End Helper function
