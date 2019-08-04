@@ -1,29 +1,29 @@
 <template>
   <section>
-    <h3>{{namesObj.firstNames}} and {{namesObj.secondNames}}:</h3>
+    <h3>{{ namesObj.firstNames }} and {{ namesObj.secondNames }}:</h3>
     <ul>
-      <li v-for="(i, index) in namesObj.shipNames" v-bind:key="index.toString()">{{i}}</li>
+      <li v-for="(i, index) in namesObj.shipNames" v-bind:key="index.toString()">{{ i }}</li>
     </ul>
   </section>
 </template>
 
 <script lang="ts">
 export default {
-    name: 'test',
-    props: ['namesObj'],
-    data() {
-        return {};
-    },
-    mounted() {
+  name: 'test',
+  props: ['namesObj'],
+  data() {
+    return {};
+  },
+  mounted() {
     // console.log(this.namesObj.shipNames);
+  },
+  methods: {
+    test(i) {
+      // const index = this.namesObj.shipNames.indexOf(i);
+      console.log(i);
+      return i.toString();
     },
-    methods: {
-        test(i) {
-            // const index = this.namesObj.shipNames.indexOf(i);
-            console.log(i);
-            return i.toString();
-        },
-    },
+  },
 };
 </script>
 

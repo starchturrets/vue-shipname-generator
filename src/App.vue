@@ -3,7 +3,7 @@
     <h2>Start Typing</h2>
     <input
       v-focus
-      v-on:keydown="ship"
+      v-on:keyup="ship"
       v-on:keyup.enter="$event.target.nextElementSibling.focus()"
       ref="firstInput"
       placeholder="Enter a name!"
@@ -12,43 +12,40 @@
     <input
       ref="secondInput"
       placeholder="Enter another name!"
-      v-on:keydown="ship"
+      v-on:keyup="ship"
       v-on:keyup.enter="$event.target.previousElementSibling.focus()"
       type="text"
     />
 
     <div class="output" ref="output">
-      <test
-        ref="list"
-        v-for="(i, index) of shipNames"
-        v-bind:key="index"
-        v-bind:namesObj="i"
-      ></test>
+      <section>
+        <ul>
+          <h3>
+            {{ obj.firstName }} <span v-if="obj.secondName"> and {{ obj.secondName }}:</span>
+          </h3>
+          <li v-for="(item, index) in obj.shipNames" :key="index">{{ item }}</li>
+        </ul>
+      </section>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import test from './component.vue';
-import ship from './ship';
+// import test from './component.vue';
+// eslint-disable-next-line import/no-unresolved
+import Ship from './ship';
 // Extremely hacky, but it works
 export default {
   name: 'Test',
   components: {
-    test,
+    // test,
   },
 
   data() {
     return {
-      shipNames: [] as string[],
+      obj: {}, // Just an object with nothing to see here
       firstFocused: true as boolean,
       secondFocused: false as boolean,
-      // clearForms() {
-      //   const { firstInput } = this.$refs;
-      //   const { secondInput } = this.$refs;
-      //   firstInput.value = '';
-      //   secondInput.value = '';
-      // },
     };
   },
   directives: {
@@ -69,12 +66,12 @@ export default {
       }
     },
     ship() {
-      const vm = this;
       const { firstInput, secondInput } = this.$refs;
       if (firstInput instanceof HTMLInputElement && secondInput instanceof HTMLInputElement) {
         console.log(firstInput.value);
         console.log(secondInput.value);
-        this.shipNames = ship(firstInput.value, secondInput.value);
+        this.obj = new Ship([firstInput.value, secondInput.value]);
+        console.log(this.obj);
       } else {
         console.error('The arguments are NOT HTMLInputElements');
       }
@@ -92,9 +89,9 @@ export default {
     //     if (ev.keyCode === 13 && ev.target === firstInput && ev.target.value) {
     //       this.$refs.secondInput.focus();
     //     } else if (ev.keyCode === 13 && ev.target === secondInput && values) {
+    //       this.clearForms();
     //       firstInput.focus();
     //       this.shipNames.push(ship(firstInput.value, secondInput.value));
-    //       this.clearForms();
     //     }
     //   }
     // },
@@ -124,6 +121,16 @@ body {
 
 h2 {
   cursor: pointer;
+}
+
+section {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  margin: 0;
+  padding: 0;
 }
 
 input[type='text'] {
