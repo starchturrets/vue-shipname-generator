@@ -21,9 +21,10 @@
       <section>
         <ul>
           <h3>
-            {{ obj.firstName }} <span v-if="obj.secondName"> and {{ obj.secondName }}:</span>
+            {{ obj.firstName }}
+            <span v-if="obj.firstName && obj.secondName"> and {{ obj.secondName }}:</span>
           </h3>
-          <li v-for="(item, index) in obj.shipNames" :key="index">{{ item }}</li>
+          <li v-for="(item, index) in obj.coupleNames" :key="index">{{ item }}</li>
         </ul>
       </section>
     </div>
@@ -58,7 +59,7 @@ export default {
   },
   methods: {
     // Multipurpose function: if the inputed e
-    enterHandler(str: string, el: HTMLInputElement) {
+    enterHandler: (str: string, el: HTMLInputElement) => {
       if (str !== '' && el === null) {
         console.log('Shipping');
       } else if (str !== '' && el) {
@@ -68,33 +69,12 @@ export default {
     ship() {
       const { firstInput, secondInput } = this.$refs;
       if (firstInput instanceof HTMLInputElement && secondInput instanceof HTMLInputElement) {
-        console.log(firstInput.value);
-        console.log(secondInput.value);
-        this.obj = new Ship([firstInput.value, secondInput.value]);
-        console.log(this.obj);
+        this.obj = Ship(firstInput.value, secondInput.value);
+        // console.log(this.obj);
       } else {
         console.error('The arguments are NOT HTMLInputElements');
       }
     },
-    // remove() {
-    //   this.clearForms();
-    //   this.shipNames = [];
-    // },
-    // checkForEnter(ev: Event) {
-    //   if (ev.target instanceof Element) {
-    //     // const {target}= ev as HTMLElement| unknown;
-    //     const { firstInput } = this.$refs;
-    //     const { secondInput } = this.$refs;
-    //     const values = firstInput.value && secondInput.value;
-    //     if (ev.keyCode === 13 && ev.target === firstInput && ev.target.value) {
-    //       this.$refs.secondInput.focus();
-    //     } else if (ev.keyCode === 13 && ev.target === secondInput && values) {
-    //       this.clearForms();
-    //       firstInput.focus();
-    //       this.shipNames.push(ship(firstInput.value, secondInput.value));
-    //     }
-    //   }
-    // },
   },
 };
 </script>
