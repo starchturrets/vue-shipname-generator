@@ -14,6 +14,7 @@
         placeholder="Enter a name!"
         type="text"
       />
+
       <input
         ref="secondInput"
         placeholder="Enter another name!"
@@ -28,7 +29,7 @@
     </form>
     <div class="output" ref="output">
       <section>
-        <ul>
+        <ul v-if="this.first !== ''">
           <h3>
             {{ obj.firstName }}
             <span v-if="checkValue() === true"> and {{ obj.secondName }}:</span>

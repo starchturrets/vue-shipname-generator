@@ -7,7 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/essential',
     'airbnb-base',
-    'prettier',
+
     'plugin:prettier/recommended',
   ],
   globals: {
@@ -19,15 +19,8 @@ module.exports = {
     sourceType: 'module',
     parser: '@typescript-eslint/parser',
   },
-  overrides: [
-    {
-      files: '*.html',
-      rules: {
-        'prettier/prettier': 'off',
-      },
-    },
-  ],
-  plugins: ['vue', '@typescript-eslint', 'prettier', 'html'],
+
+  plugins: ['vue', '@typescript-eslint', 'prettier'],
   rules: {
     indent: 'off',
     '@typescript-eslint/indent': 'off',
