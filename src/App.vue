@@ -1,11 +1,15 @@
 <template>
   <div class="container">
-    <h2>Start Typing</h2>
+    <h2>Start Typing Stuff In</h2>
     <form>
       <input
         v-focus
-        v-on:keyup="ship"
         v-on:keydown.enter="focus"
+        v-bind:value="first"
+        v-on:input="
+          first = $event.target.value;
+          ship();
+        "
         ref="firstInput"
         placeholder="Enter a name!"
         type="text"
@@ -13,7 +17,11 @@
       <input
         ref="secondInput"
         placeholder="Enter another name!"
-        v-on:keyup="ship"
+        v-bind:value="second"
+        v-on:input="
+          second = $event.target.value;
+          ship();
+        "
         v-on:keydown.enter="focus"
         type="text"
       />
@@ -23,7 +31,7 @@
         <ul>
           <h3>
             {{ obj.firstName }}
-            <span v-if="obj.firstName && obj.secondName"> and {{ obj.secondName }}:</span>
+            <span v-if="checkValue() === true"> and {{ obj.secondName }}:</span>
           </h3>
           <li v-for="(item, index) in obj.coupleNames" :key="index">{{ item }}</li>
         </ul>
@@ -35,7 +43,7 @@
 <script lang="ts">
 // import test from './component.vue';
 // eslint-disable-next-line import/no-unresolved
-import Ship from './ship';
+import Ship from './ship/ship';
 
 // Extremely hacky, but it works
 export default {
@@ -47,8 +55,8 @@ export default {
   data() {
     return {
       obj: {}, // Just an object with nothing to see here
-      firstFocused: true as boolean,
-      secondFocused: false as boolean,
+      first: '' as string,
+      second: '' as string,
     };
   },
   directives: {
@@ -60,22 +68,9 @@ export default {
     },
   },
   methods: {
-    // Multipurpose function: if the inputed e
-    enterHandler: (str: string, el: HTMLInputElement) => {
-      if (str !== '' && el === null) {
-        console.log('Shipping');
-      } else if (str !== '' && el) {
-        el.focus();
-      }
-    },
     ship() {
-      const { firstInput, secondInput } = this.$refs;
-      if (firstInput instanceof HTMLInputElement && secondInput instanceof HTMLInputElement) {
-        this.obj = Ship('Joel', 'Christlyn');
-        // console.log(this.obj);
-      } else {
-        console.error('The arguments are NOT HTMLInputElements');
-      }
+      console.log(this.first);
+      this.obj = Ship(this.first, this.second);
     },
     focus(ev: Event) {
       const target = ev.target as HTMLElement;
@@ -83,42 +78,16 @@ export default {
       const sibling = (target.previousElementSibling || target.nextElementSibling) as HTMLElement;
       sibling.focus();
     },
+    checkValue() {
+      return this.first.trim() !== '' && this.second.trim() !== '';
+    },
   },
 };
 </script>
 
-<style>
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-html {
-  box-sizing: border-box;
-  font-size: 62.5%;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
+<style lang="scss">
 h2 {
   cursor: pointer;
-}
-
-section {
-  margin: 0;
-  padding: 0;
-}
-
-div {
-  margin: 0;
-  padding: 0;
 }
 
 input[type='text'] {
@@ -161,11 +130,6 @@ ul {
 }
 
 li {
-  list-style: none;
   font-weight: lighter;
-}
-
-li::before {
-  content: '- ';
 }
 </style>

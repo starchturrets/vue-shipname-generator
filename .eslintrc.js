@@ -19,18 +19,24 @@ module.exports = {
     sourceType: 'module',
     parser: '@typescript-eslint/parser',
   },
-  plugins: ['vue', '@typescript-eslint', 'prettier'],
+  overrides: [
+    {
+      files: '*.html',
+      rules: {
+        'prettier/prettier': 'off',
+      },
+    },
+  ],
+  plugins: ['vue', '@typescript-eslint', 'prettier', 'html'],
   rules: {
     indent: 'off',
     '@typescript-eslint/indent': 'off',
     'no-unused-vars': 'off',
     'no-console': 'off',
+    'import/prefer-default-export': 'off',
     'prettier/prettier': [
       'error',
-      // {
-      //   singleQuote: true,
-      //   trailingComma: 'all',
-      // },
+
       {
         usePrettierrc: true,
       },
