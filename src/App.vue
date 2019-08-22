@@ -41,16 +41,12 @@
 </template>
 
 <script lang="ts">
-// import test from './component.vue';
 // eslint-disable-next-line import/no-unresolved
 import Ship from './ship/ship';
 
 // Extremely hacky, but it works
 export default {
-  name: 'Test',
-  components: {
-    // test,
-  },
+  name: 'Shipper',
 
   data() {
     return {
@@ -69,7 +65,6 @@ export default {
   },
   methods: {
     ship() {
-      console.log(this.first);
       this.obj = Ship(this.first, this.second);
     },
     focus(ev: Event) {
@@ -79,6 +74,7 @@ export default {
       sibling.focus();
     },
     checkValue() {
+      // This function checks if the input values are not simply a bunch of empty whitespace
       return this.first.trim() !== '' && this.second.trim() !== '';
     },
   },
