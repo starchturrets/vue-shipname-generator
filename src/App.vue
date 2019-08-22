@@ -1,22 +1,23 @@
 <template>
   <div class="container">
     <h2>Start Typing</h2>
-    <input
-      v-focus
-      v-on:keyup="ship"
-      v-on:keyup.enter="$event.target.nextElementSibling.focus()"
-      ref="firstInput"
-      placeholder="Enter a name!"
-      type="text"
-    />
-    <input
-      ref="secondInput"
-      placeholder="Enter another name!"
-      v-on:keyup="ship"
-      v-on:keyup.enter="$event.target.previousElementSibling.focus()"
-      type="text"
-    />
-
+    <form>
+      <input
+        v-focus
+        v-on:keyup="ship"
+        v-on:keydown.enter="focus"
+        ref="firstInput"
+        placeholder="Enter a name!"
+        type="text"
+      />
+      <input
+        ref="secondInput"
+        placeholder="Enter another name!"
+        v-on:keyup="ship"
+        v-on:keydown.enter="focus"
+        type="text"
+      />
+    </form>
     <div class="output" ref="output">
       <section>
         <ul>
@@ -35,6 +36,7 @@
 // import test from './component.vue';
 // eslint-disable-next-line import/no-unresolved
 import Ship from './ship';
+
 // Extremely hacky, but it works
 export default {
   name: 'Test',
@@ -69,11 +71,17 @@ export default {
     ship() {
       const { firstInput, secondInput } = this.$refs;
       if (firstInput instanceof HTMLInputElement && secondInput instanceof HTMLInputElement) {
-        this.obj = Ship(firstInput.value, secondInput.value);
+        this.obj = Ship('Joel', 'Christlyn');
         // console.log(this.obj);
       } else {
         console.error('The arguments are NOT HTMLInputElements');
       }
+    },
+    focus(ev: Event) {
+      const target = ev.target as HTMLElement;
+
+      const sibling = (target.previousElementSibling || target.nextElementSibling) as HTMLElement;
+      sibling.focus();
     },
   },
 };
@@ -145,5 +153,19 @@ input[type='text']:active {
   position: relative;
   scrollbar-width: none;
   width: 350px;
+}
+
+ul {
+  padding: 0;
+  font-weight: 300;
+}
+
+li {
+  list-style: none;
+  font-weight: lighter;
+}
+
+li::before {
+  content: '- ';
 }
 </style>
