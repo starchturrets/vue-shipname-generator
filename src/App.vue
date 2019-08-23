@@ -3,7 +3,7 @@
     <h2>Start Typing Stuff In</h2>
     <form>
       <input
-        v-focus
+        autofocus
         v-on:keydown.enter="focus"
         v-bind:value="first"
         v-on:input="
@@ -56,14 +56,7 @@ export default {
       second: '' as string,
     };
   },
-  directives: {
-    focus: {
-      // directive definition
-      inserted(el: HTMLElement) {
-        el.focus();
-      },
-    },
-  },
+
   methods: {
     ship() {
       this.obj = Ship(this.first, this.second);
@@ -85,6 +78,10 @@ export default {
 <style lang="scss">
 h2 {
   cursor: pointer;
+}
+
+div {
+  border: none;
 }
 
 input[type='text'] {
@@ -127,6 +124,7 @@ ul {
 }
 
 li {
+  margin-left: 1.49rem;
   font-weight: lighter;
 }
 </style>
