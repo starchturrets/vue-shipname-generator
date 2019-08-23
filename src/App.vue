@@ -43,9 +43,10 @@
 
 <script lang="ts">
 // eslint-disable-next-line import/no-unresolved
+import { Vue } from 'vue-property-decorator';
 import Ship from './ship/ship';
-
 // Extremely hacky, but it works
+// export default class App extends Vue{}
 export default {
   name: 'Shipper',
 
@@ -59,7 +60,7 @@ export default {
 
   methods: {
     ship() {
-      this.obj = Ship(this.first, this.second);
+      this.obj = Ship(this.first.trimRight(), this.second.trimRight());
     },
     focus(ev: Event) {
       const target = ev.target as HTMLElement;

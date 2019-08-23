@@ -3,13 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:vue/essential',
-    'airbnb-base',
-
-    'plugin:prettier/recommended',
-  ],
+  extends: ['airbnb-typescript/base', 'plugin:vue/essential', 'plugin:prettier/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
