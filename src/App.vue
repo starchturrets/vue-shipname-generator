@@ -43,37 +43,44 @@
 
 <script lang="ts">
 // eslint-disable-next-line import/no-unresolved
-import { Vue } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 import Ship from './ship/ship';
 // Extremely hacky, but it works
 // export default class App extends Vue{}
-export default {
-  name: 'Shipper',
+@Component
+export default class App extends Vue {
+  name: string;
 
-  data() {
-    return {
-      obj: {}, // Just an object with nothing to see here
-      first: '' as string,
-      second: '' as string,
-    };
-  },
+  obj: object = {}; // Tis object stores the contents of the inputs, as well as the array of genarated ship names
 
-  methods: {
-    ship() {
-      this.obj = Ship(this.first.trimRight(), this.second.trimRight());
-    },
-    focus(ev: Event) {
-      const target = ev.target as HTMLElement;
+  first: string;
 
-      const sibling = (target.previousElementSibling || target.nextElementSibling) as HTMLElement;
-      sibling.focus();
-    },
-    checkValue() {
-      // This function checks if the input values are not simply a bunch of empty whitespace
-      return this.first.trim() !== '' && this.second.trim() !== '';
-    },
-  },
-};
+  second: string;
+
+  constructor() {
+    super();
+    this.name = 'Shipper';
+    this.first = '';
+    this.second = '';
+  }
+
+  ship() {
+    this.obj = Ship(this.first.trimRight(), this.second.trimRight());
+  }
+
+  // This function switches focus between the two inputs
+  focus(ev: Event) {
+    const target = ev.target as HTMLElement;
+
+    const sibling = (target.previousElementSibling || target.nextElementSibling) as HTMLElement;
+    sibling.focus();
+  }
+
+  checkValue() {
+    // This function checks if the input values are not simply a bunch of empty whitespace
+    return this.first.trim() !== '' && this.second.trim() !== '';
+  }
+}
 </script>
 
 <style lang="scss">
@@ -81,17 +88,8 @@ h2 {
   cursor: pointer;
 }
 
-div {
-  border: none;
-}
-
 input[type='text'] {
   display: block;
-  outline: none;
-  background-color: inherit;
-  color: inherit;
-  border-style: none;
-  font: inherit;
   padding: 0.5em;
   width: 100%;
   height: 2.5em;
@@ -125,7 +123,8 @@ ul {
 }
 
 li {
-  margin-left: 1.49rem;
+  margin-left: 1.6rem;
+  font-size: 1.1em;
   font-weight: lighter;
 }
 </style>

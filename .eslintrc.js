@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ['airbnb-typescript/base', 'plugin:vue/essential', 'plugin:prettier/recommended'],
+  extends: [
+    'airbnb-typescript/base',
+    'plugin:vue/essential',
+    // 'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -21,6 +26,8 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-console': 'off',
     'import/prefer-default-export': 'off',
+    '@typescript-eslint/semi': 'off',
+    'class-methods-use-this': 'off',
     'prettier/prettier': [
       'error',
 
