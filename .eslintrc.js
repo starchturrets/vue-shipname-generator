@@ -7,19 +7,20 @@ module.exports = {
     'airbnb-typescript/base',
     'plugin:vue/essential',
     // 'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'prettier',
   ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
+  parser: 'vue-eslint-parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
     parser: '@typescript-eslint/parser',
   },
 
-  plugins: ['vue', '@typescript-eslint', 'prettier'],
+  plugins: ['vue', '@typescript-eslint'],
   rules: {
     indent: 'off',
     '@typescript-eslint/indent': 'off',
@@ -28,12 +29,5 @@ module.exports = {
     'import/prefer-default-export': 'off',
     '@typescript-eslint/semi': 'off',
     'class-methods-use-this': 'off',
-    'prettier/prettier': [
-      'error',
-
-      {
-        usePrettierrc: true,
-      },
-    ],
   },
 };
