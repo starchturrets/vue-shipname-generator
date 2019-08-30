@@ -13,7 +13,7 @@ new Vue({
 // Register service worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('sw.js')
+    .register('sw.ts')
     .then(reg => {
       // registration worked
       console.log(`Registration succeeded. Scope is ${reg.scope}`);
